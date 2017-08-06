@@ -51,6 +51,6 @@ class BlockchainActor extends Actor {
         println("Block rejected")
         replyTo ! BlockRejected(block)
       }
-      println(s"Block #${block.index}, nonce: ${block.nonce}, hash: ${block.hash}")
+      println(block)
   }
 }

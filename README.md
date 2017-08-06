@@ -18,6 +18,5 @@ The blockchain impose a hash containing four leading zeros as proof of work.
 
 ## TODO
 
-- Add tests
-- Add ApiActor
+- Add http API
 - Add frontend in react

@@ -10,6 +10,5 @@ lazy val root = (project in file(".")).
       version      := "0.1.0-SNAPSHOT"
     )),
     name := "akka-blockchain",
-    libraryDependencies += scalaTest % Test,
-    libraryDependencies += "com.typesafe.akka" % "akka-actor_2.12" % "2.5.3"
+    libraryDependencies ++= all
   )
