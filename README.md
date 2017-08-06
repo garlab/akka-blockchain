@@ -1,6 +1,6 @@
 # Akka blockchain
 
-This is a sample project to modelise a minimum blockchain implementation with akka.
+This is a sample project to implement a minimum blockchain with akka.
 The blockchain impose a hash containing four leading zeros as proof of work.
 
 # Dependencies
@@ -19,6 +19,5 @@ The blockchain impose a hash containing four leading zeros as proof of work.
 ## TODO
 
 - Add tests
-- Add MiningActor
 - Add ApiActor
 - Add frontend in react

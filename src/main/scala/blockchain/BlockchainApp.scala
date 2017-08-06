@@ -6,7 +6,7 @@ import blockchain.actors.BlockchainActor._
 
 object BlockchainApp extends App {
   val system = ActorSystem("akka-blockchain")
-  val blockchain = system.actorOf(Props[BlockchainActor])
+  val blockchain = system.actorOf(Props[BlockchainActor], "Blockchain")
 
   blockchain ! AddBlock("fooobar")
   blockchain ! AddBlock("hello")
