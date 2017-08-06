@@ -1,6 +1,7 @@
-package blockchain
+package blockchain.actors
 
 import akka.actor.Actor
+import blockchain.entities.Block
 
 object BlockchainActor {
   case object RequestChain
@@ -8,6 +9,8 @@ object BlockchainActor {
 }
 
 class BlockchainActor extends Actor {
+  import BlockchainActor._
+  
   private var blocks: List[Block] = Nil
 
   def timestamp: Long = System.currentTimeMillis / 1000

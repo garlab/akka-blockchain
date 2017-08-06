@@ -21,5 +21,4 @@ The blockchain impose a hash containing four leading zeros as proof of work.
 - Add tests
 - Add MiningActor
 - Add ApiActor
-- Put actors in different folder
 - Add frontend in react

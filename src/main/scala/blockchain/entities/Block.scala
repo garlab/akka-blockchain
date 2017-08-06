@@ -1,6 +1,6 @@
-package blockchain
+package blockchain.entities
 
-import Crypto._
+import blockchain.utils.Crypto._
 
 case class Block(index: Int, nonce: Long, timestamp: Long, data: String, previousHash: String) {
   def hash = sha256Hash(
@@ -8,6 +8,6 @@ case class Block(index: Int, nonce: Long, timestamp: Long, data: String, previou
   )
 
   def withNonce(nonce: Long) = copy(nonce = nonce)
-  
+
   def satisfiesPow = hash startsWith "0000"
 }
