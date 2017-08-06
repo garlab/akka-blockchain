@@ -2,7 +2,7 @@ package blockchain
 
 import akka.actor._
 
-object Hello extends App {
+object BlockchainApp extends App {
   val system = ActorSystem("akka-blockchain")
   val blockchain = system.actorOf(Props[BlockchainActor])
 
