@@ -1,12 +1,15 @@
 import Dependencies._
 
+resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
+
 lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
-      organization := "com.example",
+      organization := "akka-blockchain",
       scalaVersion := "2.12.1",
       version      := "0.1.0-SNAPSHOT"
     )),
-    name := "Hello",
-    libraryDependencies += scalaTest % Test
+    name := "akka-blockchain",
+    libraryDependencies += scalaTest % Test,
+    libraryDependencies += "com.typesafe.akka" % "akka-actor_2.12" % "2.5.3"
   )
