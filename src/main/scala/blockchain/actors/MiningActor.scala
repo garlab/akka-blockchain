@@ -20,7 +20,7 @@ class MiningActor extends Actor {
     }
   }
 
-  def receive = {
+  override def receive = {
     case Mine(block) =>
       sender ! mine(block)
   }

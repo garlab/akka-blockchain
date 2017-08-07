@@ -18,5 +18,10 @@ The blockchain impose a hash containing four leading zeros as proof of work.
 
 ## TODO
 
+- Restart MiningActor after timeout
 - Add http API
 - Add frontend in react
+
+## Resources
+
+http://johnmathews.eu/blockchain-introduction.html
