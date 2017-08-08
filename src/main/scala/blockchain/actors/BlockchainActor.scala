@@ -11,7 +11,8 @@ import blockchain.entities.Block
 import blockchain.actors.MiningActor._
 
 object BlockchainActor {
-  case object RequestChain
+  case object RequestBlockchain
+  case class Blockchain(blocks: List[Block], timestamp: Long)
   case class AddBlock(data: String)
   case class BlockSaved(block: Block)
   case class BlockRejected(block: Block)
@@ -31,6 +32,8 @@ class BlockchainActor extends Actor with ActorLogging {
   }
 
   override def receive = {
+    case RequestBlockchain =>
+      sender ! Blockchain(blocks, timestamp)
     case AddBlock(data) =>
       val block = Block(blocks.head.index + 1, 0, timestamp, data, blocks.head.hash)
       val replyTo = sender

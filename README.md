@@ -24,4 +24,6 @@ The blockchain impose a hash containing four leading zeros as proof of work.
 
 ## Resources
 
-http://johnmathews.eu/blockchain-introduction.html
+- http://johnmathews.eu/blockchain-introduction.html
+- https://medium.com/crypto-currently/lets-build-the-tiniest-blockchain-e70965a248b
+- https://github.com/aviaviavi/legion
