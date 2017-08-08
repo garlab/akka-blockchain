@@ -1,8 +1,6 @@
 package blockchain.actors
 
-import akka.actor.Actor
-import akka.actor.ActorRef
-import akka.actor.Props
+import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import akka.pattern.{ask, pipe}
 import akka.util.Timeout
 import concurrent._
@@ -19,12 +17,12 @@ object BlockchainActor {
   case class BlockRejected(block: Block)
 }
 
-class BlockchainActor extends Actor {
+class BlockchainActor extends Actor with ActorLogging {
   import BlockchainActor._
 
   private var blocks: List[Block] = Nil
 
-  val miningActor = context.actorOf(Props[MiningActor], "Mining")
+  val miningActor = context.actorOf(Props[MiningActor], "MiningActor")
 
   def timestamp: Long = System.currentTimeMillis / 1000
 
@@ -32,23 +30,23 @@ class BlockchainActor extends Actor {
     blocks ::= Block(0, 0, timestamp, "Genesis block", "0" * 64)
   }
 
-  def receive = {
+  override def receive = {
     case AddBlock(data) =>
       val block = Block(blocks.head.index + 1, 0, timestamp, data, blocks.head.hash)
       val replyTo = sender
       implicit val timeout = Timeout(4 seconds)
 
-      println(s"Block mined ${blocks.head.index} $data")
+      log.info(s"Block mined ${blocks.head.index} $data")
 
       ((miningActor ? Mine(block)) map (replyTo -> _)) pipeTo self
 
     case (replyTo: ActorRef, block: Block) =>
       if (block.index == blocks.head.index + 1) {
         blocks = block :: blocks
-        println("Block saved")
+        log.info("Block saved")
         replyTo ! BlockSaved(block)
       } else {
-        println("Block rejected")
+        log.info("Block rejected")
         replyTo ! BlockRejected(block)
       }
       println(block)
