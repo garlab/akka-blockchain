@@ -14,6 +14,7 @@ object BlockchainActor {
   case object RequestBlockchain
   case class Blockchain(blocks: List[Block], timestamp: Long)
   case class AddBlock(data: String)
+  case class MiningFailed(block: Block, reason: String)
   case class BlockSaved(block: Block)
   case class BlockRejected(block: Block)
 }
@@ -34,6 +35,7 @@ class BlockchainActor extends Actor with ActorLogging {
   override def receive = {
     case RequestBlockchain =>
       sender ! Blockchain(blocks, timestamp)
+
     case AddBlock(data) =>
       val block = Block(blocks.head.index + 1, 0, timestamp, data, blocks.head.hash)
       val replyTo = sender
@@ -41,7 +43,10 @@ class BlockchainActor extends Actor with ActorLogging {
 
       log.info(s"Block mined ${blocks.head.index} $data")
 
-      ((miningActor ? Mine(block)) map (replyTo -> _)) pipeTo self
+      ((miningActor ? Mine(block)) map (replyTo -> _)) recover {
+        case t: Throwable =>
+          MiningFailed(block, t.getMessage)
+      } pipeTo self
 
     case (replyTo: ActorRef, block: Block) =>
       if (block.index == blocks.head.index + 1) {
@@ -52,6 +57,9 @@ class BlockchainActor extends Actor with ActorLogging {
         log.info("Block rejected")
         replyTo ! BlockRejected(block)
       }
-      println(block)
+      log.info(block.toString)
+
+    case MiningFailed(block, reason) =>
+      log.error(s"Mining for block $block failed $reason")
   }
 }
