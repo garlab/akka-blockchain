@@ -27,3 +27,6 @@ The blockchain impose a hash containing four leading zeros as proof of work.
 - http://johnmathews.eu/blockchain-introduction.html
 - https://medium.com/crypto-currently/lets-build-the-tiniest-blockchain-e70965a248b
 - https://github.com/aviaviavi/legion
+- https://github.com/theiterators/akka-http-microservice/
+- https://github.com/akka/akka-samples/tree/2.5/akka-sample-camel-scala
+- https://medium.com/akka-for-newbies/actor-supervision-dbbb96734176
